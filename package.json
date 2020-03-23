@@ -1,0 +1,16 @@
+{
+	"name": "k-utils",
+	"version": "0.0.1",
+	"main": "./utils.js",
+	"private": true,
+	"scripts": {
+		"knm": "knm-builder",
+		"publish": "npm run knm && \"./publish\"",
+		"test": "mocha --exit"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"chai": "^4.2.0",
+		"mocha": "^5.2.0"
+	}
+}

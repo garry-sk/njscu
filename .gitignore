@@ -1,0 +1,6 @@
+.vs
+.vscode
+out_pub/
+dest/
+test/tmp
+node_modules/
