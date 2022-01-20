@@ -18,8 +18,6 @@
     - e - property is enumerable
     - c - property is configurable
     - a - access decriptor
-<p>
-\d+\n#<br> or string 'weca'
  */
 exports.setProperty = function setProperty(obj, name, val, mask = 0) {
 	const desc = {};
@@ -40,5 +38,5 @@ exports.setProperty = function setProperty(obj, name, val, mask = 0) {
 	}
 	desc.enumerable = !!(mask & 0b10);
 	desc.configurable = !!(mask & 0b100);
-	Object.defineProperty(obj, name, desc);
+	return Object.defineProperty(obj, name, desc);
 };

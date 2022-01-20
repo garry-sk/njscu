@@ -1,16 +1,24 @@
 {
-	"name": "k-utils",
-	"version": "0.0.1",
+	"name": "njscu",
+	"version": "0.1.0",
+	"description": "Node.js common utils",
 	"main": "./utils.js",
-	"private": true,
+  "homepage": "https://github.com/garry-sk/njscu",
+  "author": {
+    "name": "garry",
+    "email": "garrysk@yandex.ru"
+  },
+  "license" : "BSD-3-Clause",
 	"scripts": {
-		"knm": "knm-builder",
-		"publish": "npm run knm && \"./publish\"",
-		"test": "mocha --exit"
+		"test": "mocha"
 	},
 	"dependencies": {},
 	"devDependencies": {
-		"chai": "^4.2.0",
-		"mocha": "^5.2.0"
-	}
+		"chai": "*",
+		"mocha": "*"
+	},
+  "keywords": [
+    "node", "nodejs", "utils", "common"
+  ],
+  "engines" : { "node" : ">=0.10.0" }
 }
