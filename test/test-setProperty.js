@@ -31,8 +31,10 @@ describe('njscu', function() {
 			// property descriptor have property 'value'
 			expect(o).to.haveOwnPropertyDescriptor('a').that.not.have.property('value');
 			// property have getter/setter
-			expect(o).to.haveOwnPropertyDescriptor('a').that.have.property('get');
-			expect(o).to.haveOwnPropertyDescriptor('a').that.have.property('set');
+			expect(o).to.haveOwnPropertyDescriptor('a').that
+			.have.property('get').that.is.a('function');
+			expect(o).to.haveOwnPropertyDescriptor('a').that
+			.have.property('get').that.is.a('function');
 			// property 'a' is not enumerable
 			expect(o.propertyIsEnumerable('a')).to.be.false;
 			// property 'a' is writable
@@ -52,8 +54,57 @@ describe('njscu', function() {
 			// property descriptor have property 'value'
 			expect(o).to.haveOwnPropertyDescriptor('a').that.not.have.property('value');
 			// property have getter/setter
-			expect(o).to.haveOwnPropertyDescriptor('a').that.have.property('get');
-			expect(o).to.haveOwnPropertyDescriptor('a').that.have.property('set');
+			expect(o).to.haveOwnPropertyDescriptor('a').that
+			.have.property('get').that.is.a('function');
+			expect(o).to.haveOwnPropertyDescriptor('a').that
+			.have.property('get').that.is.a('function');
+			// property 'a' is not enumerable
+			expect(o.propertyIsEnumerable('a')).to.be.false;
+			// property 'a' is writable
+			expect(() => { o.a = ''; }).to.not.throw();
+			// property 'a' is not configurable
+			expect(() => { Object.defineProperty(o, 'a', { writable: true }); })
+			.to.throw(TypeError, "Cannot redefine property: a");
+			expect(() => { Object.defineProperty(o, 'a', { value: 'x' }); })
+			.to.throw(TypeError, "Cannot redefine property: a");
+		});
+		it('set only getter (mask is number)', () => {
+			const o = {};
+			const p = [ () => 'val' ];
+			setProperty(o, 'a', p, 0b1000);
+			expect(o).to.have.own.property('a');
+			expect(o.a).to.equal('val');
+			// property descriptor not have property 'value'
+			expect(o).to.haveOwnPropertyDescriptor('a').that.not.have.property('value');
+			// property have getter, setter is undefined
+			expect(o).to.haveOwnPropertyDescriptor('a').that
+			.have.property('get').that.is.a('function');
+			expect(o).to.haveOwnPropertyDescriptor('a').that
+			.have.property('set').that.is.undefined;
+			// property 'a' is not enumerable
+			expect(o.propertyIsEnumerable('a')).to.be.false;
+			// property 'a' is not writable
+			expect(() => { o.a = ''; })
+			.to.throw(TypeError, 'Cannot set property a of #<Object> which has only a getter');
+			// property 'a' is not configurable
+			expect(() => { Object.defineProperty(o, 'a', { writable: true }); })
+			.to.throw(TypeError, "Cannot redefine property: a");
+			expect(() => { Object.defineProperty(o, 'a', { value: 'x' }); })
+			.to.throw(TypeError, "Cannot redefine property: a");
+		});
+		it('set only setter (mask is string)', () => {
+			const o = {};
+			const p = [ , val => {} ];
+			setProperty(o, 'a', p, 'a');
+			expect(o).to.have.own.property('a');
+			expect(o.a).to.be.undefined;
+			// property descriptor not have property 'value'
+			expect(o).to.haveOwnPropertyDescriptor('a').that.not.have.property('value');
+			// property have setter, getter is undefined
+			expect(o).to.haveOwnPropertyDescriptor('a').that
+			.have.property('set').that.is.a('function');
+			expect(o).to.haveOwnPropertyDescriptor('a').that
+			.have.property('get').that.is.undefined;
 			// property 'a' is not enumerable
 			expect(o.propertyIsEnumerable('a')).to.be.false;
 			// property 'a' is writable

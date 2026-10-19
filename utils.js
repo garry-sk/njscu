@@ -8,7 +8,7 @@
     - for data descriptor - property value;
     - for access decriptor - array of accessors
     ([getter, setter] any of them can be omitted)
- * @param {Number} mask - a set of bit flags or string '[w][e][c][a]' that
+ * @param {Number|String} mask - a set of bit flags or string '[w][e][c][a]' that
     defines the property descriptor
     - bit 0 (mask: 0b0001) - is property writable. if set - true, else - false
     - bit 1 (mask: 0b0010) - is property enumerable. if set - true, else - false
@@ -40,3 +40,15 @@ exports.setProperty = function setProperty(obj, name, val, mask = 0) {
 	desc.configurable = !!(mask & 0b100);
 	return Object.defineProperty(obj, name, desc);
 };
+
+/**
+ * Gets the last element of `array-like` (has `length` and indexed element access) object.
+ * 
+ * @param {*} arrlike array-like object
+ * @returns the last element of passed value  
+ *   if argument is empty or not array-like - returns undefined.
+ */
+exports.last = function last(arrlike) {
+	if (arrlike && arrlike.length)
+		return arrlike[arrlike.length - 1];
+}

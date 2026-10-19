@@ -57,3 +57,33 @@ setProperty(obj, 'acc-property', [ () => 'val', val => {} ], 0b1110);
 // or
 setProperty(obj, 'acc-property', [ () => 'val', val => {} ], 'ace');
 ```
+
+---
+
+### last
+
+ * `arraylike` \<any\> the array-like value 
+ * Returns: the last element of
+
+Gets the last element of `array-like` (has `length` and indexed element access) object.
+If argument is empty or not `array-like` - returns undefined.
+
+```js
+const { last } = require('njscu');
+
+// array
+last([1, 2]);
+// => 2
+
+// string
+last('zxc');
+// => 'c'
+
+// Buffer
+last(Buffer.from('zxc'));
+// => 99
+
+// pseudo array-like
+last({ length: 1, 0: 42 });
+// => 42
+```
